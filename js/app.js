@@ -14,17 +14,17 @@ var app = function() {
 	];
 
 	function gotoGame(aLevel) {
-		game.init(aLevel, assets, canvasHeight, canvasWidth, stage, gotoMenu);
+		game.init(aLevel, assets, stage, gotoMenu);
 	}
 
 	function gotoMenu() {
-		menu.init(canvasHeight, canvasWidth, stage, gotoGame);
+		menu.init(stage, gotoGame);
 	}
 
 	function init() {
 		var canvas = document.getElementById('canvas');
-		canvasHeight = canvas.height;
-		canvasWidth = canvas.width;
+		conf.canvas.height = canvas.height;
+		conf.canvas.width = canvas.width;
 
 		stage = new createjs.Stage(canvas);
 		stage.snapPixelsEnabled = true;
