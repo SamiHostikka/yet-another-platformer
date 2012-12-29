@@ -1,7 +1,8 @@
-var tilemap = function() {
+var level = function() {
 	'use strict';
 
 	var assets,
+	    coins,
 	    stage;
 
 	function createWalls(aWorld) {
@@ -15,9 +16,17 @@ var tilemap = function() {
 		helper.createBody(0, 0, conf.canvas.width, 1, conf.restitution, true, conf.collision.friendly, aWorld);
 	}
 
+	function destroyCoin() {
+		coins--;
+	}
+
 	function init(aAssets, aStage) {
 		assets = aAssets;
 		stage = aStage;
+	}
+
+	function isCompleted() {
+		return coins === 0;
 	}
 
 	function render(aLevel, aWorld) {
@@ -27,6 +36,7 @@ var tilemap = function() {
 		    width = assets.levels.tilewidth / 2,
 		    height = assets.levels.tileheight / 2;
 
+		coins = 0;
 		for (var y = 0; y < map.height; y++) {
 			for (var x = 0; x < map.width; x++) {
 				drawTile(map.data[x + y * map.width], x , y, width, height, aWorld);
@@ -66,6 +76,7 @@ var tilemap = function() {
 				break;
 			// coin
 			case 2:
+				coins++;
 				aWidth /= 2;
 				aHeight /= 2;
 				restitution = 0;
@@ -94,7 +105,9 @@ var tilemap = function() {
 	}
 
 	return {
+		destroyCoin: destroyCoin,
 		init: init,
+		isCompleted: isCompleted,
 		render: render
 	};
 }();

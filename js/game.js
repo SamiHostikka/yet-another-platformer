@@ -1,14 +1,15 @@
 var game = function() {
 	'use strict';
 
-	var b2Settings = Box2D.Common.b2Settings,
+	var b2ContactListener = Box2D.Dynamics.b2ContactListener,
+	    b2Settings = Box2D.Common.b2Settings,
 	    b2Vec2 = Box2D.Common.Math.b2Vec2,
 	    b2World = Box2D.Dynamics.b2World;
 
 	var assets,
+	    currentLevel,
 	    destroyQueue = [],
 	    gotoMenu,
-	    level,
 	    stage,
 	    world;
 
@@ -20,6 +21,39 @@ var game = function() {
 			}
 		}
 		destroyQueue = [];
+	}
+
+	function collision(contact) {
+		var aBody = contact.GetFixtureA().GetBody(),
+		    bBody = contact.GetFixtureB().GetBody(),
+		    aData = aBody.GetUserData(),
+		    bData = bBody.GetUserData();
+
+		if((!aData && !bData) || aData === conf.collision.friendly || bData === conf.collision.friendly) {
+			return;
+		}
+
+		if(aData === conf.collision.trap || bData === conf.collision.trap) {
+			initStage();
+			return;
+		}
+
+		if(aData === conf.collision.character) {
+			level.destroyCoin();
+			destroyQueue.push(bBody);
+			if(level.isCompleted()) {
+				gotoNextLevel();
+			}
+			return;
+		}
+
+		if(bData === conf.collision.character) {
+			level.destroyCoin();
+			destroyQueue.push(bBody);
+			if(level.isCompleted()) {
+				gotoNextLevel();
+			}
+		}
 	}
 
 	function destroyStage() {
@@ -36,8 +70,9 @@ var game = function() {
 	}
 
 	function gotoNextLevel() {
-		level++;
-		if(level <= assets.levels.layers.length) {
+		currentLevel++;
+		if(currentLevel <= assets.levels.layers.length) {
+			destroyStage();
 			initStage();
 			return;
 		}
@@ -45,12 +80,12 @@ var game = function() {
 	}
 
 	function init(aLevel, aAssets, aStage, aGotoMenu) {
-		level = aLevel;
+		currentLevel = aLevel;
 		assets = aAssets;
 		stage = aStage;
 		gotoMenu = aGotoMenu;
 
-		tilemap.init(assets, stage);
+		level.init(assets, stage);
 		character.init(assets, stage);
 		initStage();
 		start();
@@ -62,8 +97,12 @@ var game = function() {
 		world = new b2World(gravity2, doSleep);
 		b2Settings.b2_velocityThreshold = conf.velocityThreshold;
 
-		tilemap.render(level, world);
+		level.render(currentLevel, world);
 		character.draw(world);
+
+		var collisionListener = new b2ContactListener();
+		collisionListener.BeginContact = collision;
+		world.SetContactListener(collisionListener);
 	}
 
 	function start() {
