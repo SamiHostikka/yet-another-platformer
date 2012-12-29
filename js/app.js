@@ -59,8 +59,8 @@ var app = function() {
 			},
 			images: [preloader.getResult(id).result],
 			frames: {
-				height: 96,
-				width: 75
+				height: conf.character.height,
+				width: conf.character.width
 			}
 		});
 		assets[id] = new createjs.BitmapAnimation(spriteSheet);
