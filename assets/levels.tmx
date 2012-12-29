@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="16" height="10" tilewidth="70" tileheight="70">
+ <tileset firstgid="1" name="tiles" tilewidth="70" tileheight="70">
+  <image source="tiles.png" width="560" height="70"/>
+ </tileset>
+ <layer name="level 1" width="16" height="10" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjZmBgYKYA4wNMeDAxgFh1o/op109uPLFSiAGxKACn
+  </data>
+ </layer>
+ <layer name="level 2" width="16" height="10" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjY2BgYEPCjAQwGxpGB4T0EwKU6mcmgIkFTGh4JAB8/kUPD5gaVhyYAw3jUgcA7EgA1Q==
+  </data>
+ </layer>
+ <layer name="level 3" width="16" height="10" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjZmBgYMaC2ZAwNnkYhgEmNMyARw5dngFNDJt+fPxR/aSpJ0Y/MfEJAqxImB2KWbFgDiSMLA4A/QgA5Q==
+  </data>
+ </layer>
+ <layer name="level 4" width="16" height="10" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjZmBgYKYAMyFhXHJseDAyQNdPKmBCw9QC6OYim82KhHEBbOEGA7jCglj9xAB87iekjxBA9j87EkYW58CDAYH7AUU=
+  </data>
+ </layer>
+ <layer name="level 5" width="16" height="10" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYKQAMzFAABsUE+KjY0oBOxQzEeAzIIkhA5g/mKGYWD619COHAxOJfFoB9HDCx2eFYlg4k8oHAIXjAVM=
+  </data>
+ </layer>
+ <layer name="level 6" width="16" height="10" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjZmBgYKYAUwpg5jASwIT0sxHA1ABMaJiQPLI6Qv4iFM609BcxAJe/WKGYgwBmxYEBTdsBPQ==
+  </data>
+ </layer>
+</map>
