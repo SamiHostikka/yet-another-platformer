@@ -2,8 +2,6 @@ var app = function() {
 	'use strict';
 
 	var assets = {},
-	    canvasHeight,
-	    canvasWidth,
 	    preloader,
 	    stage;
 
@@ -35,8 +33,8 @@ var app = function() {
 	function loadAssets() {
 		var msg = new createjs.Text("Loading...", "24px sans-serif", "#333");
 		msg.textAlign = "center";
-		msg.x = canvasWidth / 2;
-		msg.y = canvasHeight / 2;
+		msg.x = conf.canvas.width / 2;
+		msg.y = conf.canvas.height / 2;
 		stage.addChild(msg);
 		stage.update();
 		stage.removeChild(msg);
