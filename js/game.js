@@ -99,6 +99,10 @@ var game = function() {
 		var collisionListener = new b2ContactListener();
 		collisionListener.BeginContact = collision;
 		world.SetContactListener(collisionListener);
+
+		var info = helper.createText('Level ' + currentLevel + '/' + assets.levels.layers.length, 64, conf.canvas.width / 2, conf.canvas.height / 2);
+		stage.addChild(info);
+		createjs.Tween.get(info).wait(500).to({alpha: 0.5}, 2000).set({visible: false});
 	}
 
 	function restart() {
