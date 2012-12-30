@@ -14,13 +14,13 @@ var game = function() {
 	    world;
 
 	function clearStage() {
-		for(var i = 0, max = destroyQueue.length; i < max; i++) {
-			if(destroyQueue[i].GetUserData()) {
-				stage.removeChild(destroyQueue[i].GetUserData());
-				world.DestroyBody(destroyQueue[i]);
+		if(destroyQueue.length) {
+			var body = destroyQueue.shift();
+			world.DestroyBody(body);
+			if(body.GetUserData()) {
+				stage.removeChild(body.GetUserData());
 			}
 		}
-		destroyQueue = [];
 	}
 
 	function collision(contact) {
@@ -34,7 +34,7 @@ var game = function() {
 		}
 
 		if(aData === conf.collision.trap || bData === conf.collision.trap) {
-			initStage();
+			restart();
 			return;
 		}
 
@@ -49,7 +49,7 @@ var game = function() {
 
 		if(bData === conf.collision.character) {
 			level.destroyCoin();
-			destroyQueue.push(bBody);
+			destroyQueue.push(aBody);
 			if(level.isCompleted()) {
 				gotoNextLevel();
 			}
@@ -72,8 +72,7 @@ var game = function() {
 	function gotoNextLevel() {
 		currentLevel++;
 		if(currentLevel <= assets.levels.layers.length) {
-			destroyStage();
-			initStage();
+			restart();
 			return;
 		}
 		exit();
@@ -92,7 +91,7 @@ var game = function() {
 	}
 
 	function initStage() {
-		var gravity2 = new b2Vec2(0, 0),
+		var gravity2 = new b2Vec2(0, conf.velocity),
 		    doSleep = true;
 		world = new b2World(gravity2, doSleep);
 		b2Settings.b2_velocityThreshold = conf.velocityThreshold;
@@ -103,6 +102,12 @@ var game = function() {
 		var collisionListener = new b2ContactListener();
 		collisionListener.BeginContact = collision;
 		world.SetContactListener(collisionListener);
+	}
+
+	function restart() {
+		destroyQueue = [];
+		destroyStage();
+		initStage();
 	}
 
 	function start() {
@@ -116,7 +121,6 @@ var game = function() {
 		character.move();
 
 		world.Step(conf.timestep, conf.velocityIterations, conf.positionIterations);
-		world.DrawDebugData();
 		world.ClearForces();
 
 		stage.update();
