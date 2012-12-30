@@ -27,7 +27,6 @@ var character = function() {
 		gravity = true;
 
 		var height = conf.character.height / 2,
-		    restitution = 0,
 		    width = conf.character.width / 2,
 		    x = assets.levels.tilewidth,
 		    y = assets.levels.tileheight * (assets.levels.height - 2);
@@ -39,7 +38,7 @@ var character = function() {
 		assets.character.regY = height;
 		stage.addChild(assets.character);
 
-		body = helper.createBody(x, y, width, height, restitution, false, conf.collision.character, world);
+		body = helper.createBody(x, y, width, height, false, conf.collision.character, world);
 	}
 
 	function init(aAssets, aStage) {
@@ -86,20 +85,20 @@ var character = function() {
 	}
 
 	function move() {
-		var force = new b2Vec2(0, 0);
+		var velocity = new b2Vec2(0, 0);
 		if(walkRight) {
-			force.x  = conf.force;
+			velocity.x  = conf.velocity.x;
 		}
 		else if(walkLeft) {
-			force.x  = -conf.force;
+			velocity.x  = -conf.velocity.x;
 		}
 		if(gravity) {
-			force.y = conf.velocity;
+			velocity.y = conf.velocity.y;
 		}
 		else {
-			force.y = -conf.velocity;
+			velocity.y = -conf.velocity.y;
 		}
-		body.ApplyForce(force, body.GetWorldCenter());
+		body.SetLinearVelocity(velocity);
 
 		assets.character.x = body.GetWorldCenter().x * conf.scale;
 		assets.character.y = body.GetWorldCenter().y * conf.scale;

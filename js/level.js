@@ -7,13 +7,13 @@ var level = function() {
 
 	function createWalls(aWorld) {
 		// bottom
-		helper.createBody(0, conf.canvas.height, conf.canvas.width, 1, conf.restitution, true, conf.collision.friendly, aWorld);
+		helper.createBody(0, conf.canvas.height, conf.canvas.width, 1, true, conf.collision.friendly, aWorld);
 		// left
-		helper.createBody(0, 0, 1, conf.canvas.height, conf.restitution, true, conf.collision.friendly, aWorld);
+		helper.createBody(0, 0, 1, conf.canvas.height, true, conf.collision.friendly, aWorld);
 		// right
-		helper.createBody(conf.canvas.width, 0, 1, conf.canvas.height, conf.restitution, true, conf.collision.friendly, aWorld);
+		helper.createBody(conf.canvas.width, 0, 1, conf.canvas.height, true, conf.collision.friendly, aWorld);
 		// top
-		helper.createBody(0, 0, conf.canvas.width, 1, conf.restitution, true, conf.collision.friendly, aWorld);
+		helper.createBody(0, 0, conf.canvas.width, 1, true, conf.collision.friendly, aWorld);
 	}
 
 	function destroyCoin() {
@@ -49,8 +49,7 @@ var level = function() {
 			return;
 		}
 
-		var restitution = conf.restitution,
-		    tile = assets.tiles.clone(),
+		var tile = assets.tiles.clone(),
 		    userData,
 		    x = aX * assets.levels.tilewidth + aWidth,
 		    y = aY * assets.levels.tileheight + aHeight;
@@ -79,7 +78,6 @@ var level = function() {
 				coins++;
 				aWidth /= 2;
 				aHeight /= 2;
-				restitution = 0;
 				userData = tile;
 				break;
 			// top spikes
@@ -101,7 +99,7 @@ var level = function() {
 				userData = conf.collision.trap;
 				break;
 		}
-		helper.createBody(x, y, aWidth, aHeight, restitution, true, userData, aWorld);
+		helper.createBody(x, y, aWidth, aHeight, true, userData, aWorld);
 	}
 
 	return {

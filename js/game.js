@@ -91,7 +91,7 @@ var game = function() {
 	}
 
 	function initStage() {
-		var gravity2 = new b2Vec2(0, conf.velocity),
+		var gravity2 = new b2Vec2(0, 0),
 		    doSleep = true;
 		world = new b2World(gravity2, doSleep);
 		b2Settings.b2_velocityThreshold = conf.velocityThreshold;

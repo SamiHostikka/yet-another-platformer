@@ -13,14 +13,16 @@ var conf = {
     	trap: 2
     },
     density: 0.1,
-    force: 15,
     fps: 30,
     friction: 0.5,
     positionIterations: 3,
     restitution: 0.3,
     scale: 30,
     timestep: 1 / 60,
-    velocity: 9.81,
+    velocity: {
+    	x: 30,
+    	y: 9.81
+    },
     velocityIterations: 8,
     velocityThreshold: 0.1
 };
