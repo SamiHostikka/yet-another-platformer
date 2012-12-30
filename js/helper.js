@@ -27,7 +27,17 @@ var helper = function() {
 		return body;
 	}
 
+	function createText(aTxt, aSize, aX, aY) {
+		var txt = new createjs.Text(aTxt, aSize + 'px sans-serif', '#333');
+		txt.shadow = new createjs.Shadow('#fff', 0, 2, 0);
+		txt.textAlign = 'center';
+		txt.x = aX;
+		txt.y = aY;
+		return txt;
+	}
+
 	return {
-		createBody: createBody
+		createBody: createBody,
+		createText: createText
 	};
 }();

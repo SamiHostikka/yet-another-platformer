@@ -11,12 +11,8 @@ var app = function() {
 		{id: 'tiles', src: 'assets/tiles.png'}
 	];
 
-	function gotoGame(aLevel) {
-		game.init(aLevel, assets, stage, gotoMenu);
-	}
-
-	function gotoMenu() {
-		menu.init(stage, gotoGame);
+	function gotoGame() {
+		game.init(assets, stage);
 	}
 
 	function init() {
@@ -31,13 +27,10 @@ var app = function() {
 	}
 
 	function loadAssets() {
-		var msg = new createjs.Text("Loading...", "24px sans-serif", "#333");
-		msg.textAlign = "center";
-		msg.x = conf.canvas.width / 2;
-		msg.y = conf.canvas.height / 2;
-		stage.addChild(msg);
+		var txt = helper.createText('Loading...', 32, conf.canvas.width / 2, conf.canvas.height / 2);
+		stage.addChild(txt);
 		stage.update();
-		stage.removeChild(msg);
+		stage.removeChild(txt);
 
 		preloader = new createjs.PreloadJS();
 		preloader.onComplete = prepareAssets;
@@ -75,7 +68,7 @@ var app = function() {
 		});
 		assets[id] = new createjs.BitmapAnimation(spriteSheet);
 
-		gotoMenu();
+		gotoGame();
 	}
 
 	return {

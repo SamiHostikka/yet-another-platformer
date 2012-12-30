@@ -9,7 +9,6 @@ var game = function() {
 	var assets,
 	    currentLevel,
 	    destroyQueue = [],
-	    gotoMenu,
 	    stage,
 	    world;
 
@@ -56,33 +55,31 @@ var game = function() {
 		}
 	}
 
-	function destroyStage() {
-		stage.removeAllChildren();
-		world = null;
-	}
-
-	function exit() {
+	function gotoCongrats() {
 		character.destroy();
 		createjs.Ticker.removeAllListeners();
-		destroyStage();
+		world = null;
 
-		gotoMenu();
+		var congrats = helper.createText('Congratulations!', 64, conf.canvas.width / 2, conf.canvas.height / 2);
+		stage.addChild(congrats);
+		stage.update();
 	}
 
 	function gotoNextLevel() {
 		currentLevel++;
 		if(currentLevel <= assets.levels.layers.length) {
+			localStorage.level = currentLevel;
 			restart();
 			return;
 		}
-		exit();
+		gotoCongrats();
 	}
 
-	function init(aLevel, aAssets, aStage, aGotoMenu) {
-		currentLevel = aLevel;
+	function init(aAssets, aStage) {
 		assets = aAssets;
 		stage = aStage;
-		gotoMenu = aGotoMenu;
+
+		currentLevel = (localStorage.level && localStorage.level <= assets.levels.layers.length) ? localStorage.level : 1;
 
 		level.init(assets, stage);
 		character.init(assets, stage);
@@ -106,7 +103,8 @@ var game = function() {
 
 	function restart() {
 		destroyQueue = [];
-		destroyStage();
+		stage.removeAllChildren();
+		world = null;
 		initStage();
 	}
 
