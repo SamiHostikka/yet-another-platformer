@@ -10,7 +10,7 @@
  </layer>
  <layer name="level 2" width="16" height="10" visible="0">
   <data encoding="base64" compression="zlib">
-   eJxjY2BgYEPCjAQwGxpGB4T0EwKU6mcmgIkFTGh4JAB8/kUPD5gaVhyYAw3jUgcA7EgA1Q==
+   eJxjY2BgYEPCjAQwGxpGB4T0EwKU6mcmgIkBTDgwsQCb2qGgH59fcYUHKw7MgYZxqQMA/GgA5Q==
   </data>
  </layer>
  <layer name="level 3" width="16" height="10" visible="0">
@@ -25,12 +25,32 @@
  </layer>
  <layer name="level 5" width="16" height="10" visible="0">
   <data encoding="base64" compression="zlib">
-   eJxjZGBgYKQAMzFAABsUE+KjY0oBOxQzEeAzIIkhA5g/mKGYWD619COHAxOJfFoB9HDCx2eFYlg4k8oHAIXjAVM=
+   eJxjZGBgYBxAzEYhhgEmMvFw0c9OJoYBcuOPFYrJ1Q8A0F8BeQ==
   </data>
  </layer>
  <layer name="level 6" width="16" height="10" visible="0">
   <data encoding="base64" compression="zlib">
-   eJxjZmBgYKYAUwpg5jASwIT0sxHA1ABMaJiQPLI6Qv4iFM609BcxAJe/WKGYgwBmxYEBTdsBPQ==
+   eJytkcEKwDAIQ203bP//i3dJQILBywLvIiZVuyJi/UCCp9DVnX+DqmzqafxU7dc81roM6oBONdf53T5bcvVuWuccvNsx76imf3LivJNf93rBBZOfffR9RbsBDw==
+  </data>
+ </layer>
+ <layer name="level 7" width="16" height="10" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYKQQswExExSzQTE5epmwmEMIY9NLDmaHYnL1wfwD4zOjYWT1yHxiwwmmnhnN3zBArr8p1c9KAmbHggHviwGx
+  </data>
+ </layer>
+ <layer name="level 8" width="16" height="10" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJylUlsKACAMWg/q/jeOYILI2KAEP7R0LGpm1j65Elbniu58Bee7sMpdbCc86KgzmjGcJhr3Vet87cY7VXnuyfbXPgXvn/UjP4k3hz/B3g40vAOQ+wFX
+  </data>
+ </layer>
+ <layer name="level 9" width="16" height="10" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYKQAMzFAABsUE+KjY0oBOxQzEclHBzB/MEMxsXxq6UcOByYS+bQC6GGFj88KxbBwJpUPAIXrAVM=
+  </data>
+ </layer>
+ <layer name="level 10" width="16" height="10" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYBzCmBmK2XBgQvIwzDTAmB2KYe5lx4HR5WGA3PCjVD8rFJOrHwCq4wFX
   </data>
  </layer>
 </map>
