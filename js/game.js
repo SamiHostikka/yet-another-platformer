@@ -55,6 +55,40 @@ var game = function() {
 		}
 	}
 
+	function drawArrows() {
+		var arrow,
+		    onMouseOut = function(event) {
+		    	event.target.alpha = 0.5;
+			},
+		    onMouseOver = function(event) {
+		    	event.target.alpha = 1;
+		    };
+
+		if(currentLevel > 1) {
+			arrow = assets.arrows.clone();
+			arrow.gotoAndStop('left');
+			arrow.x = 0;
+			arrow.y = conf.canvas.height / 2;
+			arrow.onMouseOver = onMouseOver;
+			arrow.onMouseOut = onMouseOut;
+			arrow.onClick = gotoPreviousLevel;
+			createjs.Tween.get(arrow).wait(500).to({alpha: 0.5}, 2000);
+			stage.addChild(arrow);
+		}
+
+		if(localStorage.level && currentLevel < localStorage.level) {
+			arrow = assets.arrows.clone();
+			arrow.gotoAndStop('right');
+			arrow.x = conf.canvas.width - conf.arrowSize;
+			arrow.y = conf.canvas.height / 2;
+			arrow.onMouseOver = onMouseOver;
+			arrow.onMouseOut = onMouseOut;
+			arrow.onClick = gotoNextLevel;
+			createjs.Tween.get(arrow).wait(500).to({alpha: 0.5}, 2000);
+			stage.addChild(arrow);
+		}
+	}
+
 	function gotoCongrats() {
 		character.destroy();
 		createjs.Ticker.removeAllListeners();
@@ -68,11 +102,18 @@ var game = function() {
 	function gotoNextLevel() {
 		currentLevel++;
 		if(currentLevel <= assets.levels.layers.length) {
-			localStorage.level = currentLevel;
+			if(!localStorage.level || currentLevel > localStorage.level) {
+				localStorage.level = currentLevel;
+			}
 			restart();
 			return;
 		}
 		gotoCongrats();
+	}
+
+	function gotoPreviousLevel() {
+		currentLevel--;
+		restart();
 	}
 
 	function init(aAssets, aStage) {
@@ -107,6 +148,7 @@ var game = function() {
 		var info = helper.createText('Level ' + currentLevel + '/' + assets.levels.layers.length, 48, conf.canvas.width / 2, conf.canvas.height / 2);
 		createjs.Tween.get(info).wait(500).to({alpha: 0.5}, 2000).set({visible: false});
 		stage.addChild(info);
+		drawArrows();
 	}
 
 	function restart() {

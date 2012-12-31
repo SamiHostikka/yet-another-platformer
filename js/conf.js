@@ -1,4 +1,5 @@
 var conf = {
+    arrowSize: 35,
     canvas: {
     	height: 0,
     	width: 0

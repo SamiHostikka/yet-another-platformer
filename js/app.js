@@ -6,6 +6,7 @@ var app = function() {
 	    stage;
 
 	var MANIFEST = [
+		{id: 'arrows', src: 'assets/arrows.png'},
 		{id: 'character', src: 'assets/character.png'},
 		{id: 'levels', src: 'assets/levels.json'},
 		{id: 'tiles', src: 'assets/tiles.png'}
@@ -21,6 +22,7 @@ var app = function() {
 		conf.canvas.width = canvas.width;
 
 		stage = new createjs.Stage(canvas);
+		stage.enableMouseOver();
 		stage.snapPixelsEnabled = true;
 
 		loadAssets();
@@ -38,7 +40,20 @@ var app = function() {
 	}
 
 	function prepareAssets() {
-		var id = 'character';
+		var id = 'arrows';
+		spriteSheet = new createjs.SpriteSheet({
+			animations: {
+				left: [0],
+				right: [1]			},
+			images: [preloader.getResult(id).result],
+			frames: {
+				height: conf.arrowSize,
+				width: conf.arrowSize
+			}
+		});
+		assets[id] = new createjs.BitmapAnimation(spriteSheet);
+
+		id = 'character';
 		var spriteSheet = new createjs.SpriteSheet({
 			animations: {
 				stand: [0],
