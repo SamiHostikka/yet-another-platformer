@@ -76,7 +76,7 @@ var game = function() {
 			stage.addChild(arrow);
 		}
 
-		if(localStorage.level && currentLevel < localStorage.level) {
+		if(localStorage.level && currentLevel < localStorage.level && currentLevel < assets.levels.layers.length) {
 			arrow = assets.arrows.clone();
 			arrow.gotoAndStop('right');
 			arrow.x = conf.canvas.width - conf.arrowSize;
