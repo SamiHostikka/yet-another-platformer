@@ -85,6 +85,10 @@ var game = function() {
 		character.init(assets, stage);
 		initStage();
 		start();
+
+		var help = helper.createText('Use the arrow keys to move', 48, conf.canvas.width / 2, conf.canvas.height / 2);
+		createjs.Tween.get(help).set({visible: false}).wait(2500).set({visible: true}).wait(1000).to({alpha: 0.5}, 3000).set({visible: false});
+		stage.addChild(help);
 	}
 
 	function initStage() {
@@ -100,9 +104,9 @@ var game = function() {
 		collisionListener.BeginContact = collision;
 		world.SetContactListener(collisionListener);
 
-		var info = helper.createText('Level ' + currentLevel + '/' + assets.levels.layers.length, 64, conf.canvas.width / 2, conf.canvas.height / 2);
-		stage.addChild(info);
+		var info = helper.createText('Level ' + currentLevel + '/' + assets.levels.layers.length, 48, conf.canvas.width / 2, conf.canvas.height / 2);
 		createjs.Tween.get(info).wait(500).to({alpha: 0.5}, 2000).set({visible: false});
+		stage.addChild(info);
 	}
 
 	function restart() {
