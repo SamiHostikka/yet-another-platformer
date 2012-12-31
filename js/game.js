@@ -165,11 +165,13 @@ var game = function() {
 	}
 
 	function updateStage() {
-		clearStage();
-		character.move();
+		if(world) {
+			clearStage();
+			character.move();
 
-		world.Step(conf.timestep, conf.velocityIterations, conf.positionIterations);
-		world.ClearForces();
+			world.Step(conf.timestep, conf.velocityIterations, conf.positionIterations);
+			world.ClearForces();
+		}
 
 		stage.update();
 	}
